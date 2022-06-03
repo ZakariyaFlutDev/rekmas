@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "343308744865",
+    "project_id": "eshop-51ecb",
+    "storage_bucket": "eshop-51ecb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:343308744865:android:b5963afadc799bc4ecd8e0",
+        "android_client_info": {
+          "package_name": "com.example.rekmas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "343308744865-tb8k6umqdqiquqekrs7b9c3662j9djpg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKTIFMwLcwOw6c2CKQRxvT5SvJjqoDSGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "343308744865-tb8k6umqdqiquqekrs7b9c3662j9djpg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
