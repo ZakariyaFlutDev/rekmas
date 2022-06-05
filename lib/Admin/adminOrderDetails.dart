@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:rekmas/Admin/uploadItems.dart';
 import 'package:rekmas/Config/config.dart';
 import 'package:rekmas/Widgets/loadingWidget.dart';
 import 'package:rekmas/Widgets/orderCard.dart';
@@ -10,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 import '../Address/address.dart';
+import '../Widgets/orderServiceCard.dart';
 import '../main.dart';
 
 String getOrderId = "";
@@ -83,6 +83,16 @@ class AdminOrderDetails extends StatelessWidget {
                       builder: (c, dataSnapshot){
                         return dataSnapshot.hasData
                             ? OrderCard(itemCount: dataSnapshot.data!.docs.length, data: dataSnapshot.data!.docs, orderID: orderID)
+                            : Center(child: circularProgress(),);
+                      },
+                    ),
+                    Divider(height: 2.0,),
+
+                    FutureBuilder<QuerySnapshot>(
+                      future: EcommerceApp.firestore!.collection("services").where("orderName", whereIn: dataMap[EcommerceApp.serviceID]).get(),
+                      builder: (c, dataSnapshot){
+                        return dataSnapshot.hasData
+                            ? OrderServiceCard(itemCount: dataSnapshot.data!.docs.length, data: dataSnapshot.data!.docs, orderID: orderID)
                             : Center(child: circularProgress(),);
                       },
                     ),

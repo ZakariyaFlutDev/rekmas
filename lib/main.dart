@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
           title: 'e-Shop',
-          debugShowCheckedModeBanner: false,
+          debugShowCheckedModeBanner: true,
           theme: ThemeData(
             primaryColor: Colors.green,
           ),

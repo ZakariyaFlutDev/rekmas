@@ -9,6 +9,7 @@ import 'package:rekmas/Models/address.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:rekmas/Widgets/orderServiceCard.dart';
 import 'package:rekmas/main.dart';
 
 String getOrderId = "";
@@ -80,6 +81,15 @@ class OrderDetails extends StatelessWidget {
                             builder: (c, dataSnapshot){
                               return dataSnapshot.hasData
                                   ? OrderCard(itemCount: dataSnapshot.data!.docs.length, data: dataSnapshot.data!.docs, orderID: orderID)
+                                  : Center(child: circularProgress(),);
+                            },
+                          ),
+                          Divider(height: 2.0,),
+                          FutureBuilder<QuerySnapshot>(
+                            future: EcommerceApp.firestore!.collection("services").where("orderName", whereIn: dataMap[EcommerceApp.serviceID]).get(),
+                            builder: (c, dataSnapshot){
+                              return dataSnapshot.hasData
+                                  ? OrderServiceCard(itemCount: dataSnapshot.data!.docs.length, data: dataSnapshot.data!.docs, orderID: orderID)
                                   : Center(child: circularProgress(),);
                             },
                           ),

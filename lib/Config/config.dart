@@ -31,6 +31,7 @@ class EcommerceApp
    //keyin qo'shildi
    static final String productQuantities = 'productQuantities';
    static final String productID = 'productIDs';
+   static final String serviceID = 'servicesIDs';
    static final String paymentDetails ='paymentDetails';
    static final String orderTime ='orderTime';
    static final String isSuccess ='isSuccess';

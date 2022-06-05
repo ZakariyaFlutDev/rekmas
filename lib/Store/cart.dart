@@ -40,11 +40,14 @@ class _CartPageState extends State<CartPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          if (EcommerceApp.sharedPreferences!
+          if ((EcommerceApp.sharedPreferences!
                   .getStringList(EcommerceApp.userCartList)!
                   .length ==
-              1) {
-            Fluttertoast.showToast(msg: "your Cart is empty.");
+              1 ) && (EcommerceApp.sharedPreferences!
+              .getStringList(EcommerceApp.userServiceList)!
+              .length ==
+              1 ) ) {
+            Fluttertoast.showToast(msg: "your Cart and Service are empty.");
           } else {
             Route route = MaterialPageRoute(
                 builder: (c) => Address(totalAmount: totalAmount));
@@ -67,13 +70,11 @@ class _CartPageState extends State<CartPage> {
                     return Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Center(
-                        child: cartProvider.count == 0
-                            ? Container()
-                            : Text(
+                        child: Text(
                                 "Mahsulotlar",
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 28,
+                                    fontSize: 32,
                                     fontWeight: FontWeight.w500),
                               ),
                       ),
@@ -132,9 +133,7 @@ class _CartPageState extends State<CartPage> {
                     return Padding(
                       padding: EdgeInsets.all(0.0),
                       child: Center(
-                        child: cartProvider.count == 0
-                            ? Container()
-                            : Text(
+                        child:Text(
                                 "Services",
                                 style: TextStyle(
                                     color: Colors.black,
@@ -156,10 +155,14 @@ class _CartPageState extends State<CartPage> {
                 builder: (context, snapshot) {
                   return !snapshot.hasData
                       ? SliverToBoxAdapter(
+                          child: GestureDetector(
                           child: Center(
                             child: circularProgress(),
                           ),
-                        )
+                          onTap: () {
+                            print(snapshot.hasData);
+                          },
+                        ))
                       : snapshot.data!.docs.length == 0
                           ? beginbuildingService()
                           : SliverList(
@@ -221,9 +224,7 @@ class _CartPageState extends State<CartPage> {
 
   Widget sourceInfoCart(ItemModel model, int index, BuildContext context,
       {Color background = Colors.green, removeCartFunction}) {
-
-
-    WidgetsBinding.instance?.addPostFrameCallback((_){
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
       setState(() {
         totalAmount = totalAmount! + model.price!.toDouble();
       });
@@ -342,8 +343,7 @@ class _CartPageState extends State<CartPage> {
 
   Widget sourceInfoService(ServiceModel model, int index, BuildContext context,
       {Color background = Colors.green, removeServiceCartFunction}) {
-
-    WidgetsBinding.instance?.addPostFrameCallback((_){
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
       setState(() {
         totalAmount = totalAmount! + model.totalPrice!.toDouble();
       });
@@ -458,7 +458,7 @@ class _CartPageState extends State<CartPage> {
                   onPressed: () {
                     removeServiceCartFunction();
                     Route route =
-                    MaterialPageRoute(builder: (c) => ServiceStore());
+                        MaterialPageRoute(builder: (c) => ServiceStore());
                     Navigator.pushReplacement(context, route);
                   },
                 ),
@@ -564,7 +564,7 @@ class _CartPageState extends State<CartPage> {
       EcommerceApp.sharedPreferences!
           .setStringList(EcommerceApp.userServiceList, tempCartList);
 
-      // Provider.of<CartItemCounter>(context, listen: false).displayResult();
+      Provider.of<CartItemCounter>(context, listen: false).displayResult();
 
       totalAmount = 0;
     });

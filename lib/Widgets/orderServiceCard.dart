@@ -1,18 +1,17 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:rekmas/Orders/OrderDetailsPage.dart';
-import 'package:rekmas/Models/item.dart';
 import 'package:flutter/material.dart';
-import '../Store/storehome.dart';
 
-
+import '../Models/item.dart';
+import '../Orders/OrderDetailsPage.dart';
 int counter = 0;
-class OrderCard extends StatelessWidget {
+class OrderServiceCard extends StatelessWidget {
 
   final int itemCount;
   final List<DocumentSnapshot> data;
   final String orderID;
 
-  OrderCard({Key? key, required this.itemCount, required this.data, required this.orderID});
+  OrderServiceCard({Key? key, required this.itemCount, required this.data, required this.orderID});
 
 
   @override
@@ -45,8 +44,8 @@ class OrderCard extends StatelessWidget {
           itemBuilder: (c, index){
             print("Index $index");
             print("Data ${data[index].data().toString()}");
-            ItemModel model = ItemModel.fromJson(data[index].data() as Map<String, dynamic>);
-            return sourceOrderInfo(model, context);
+            ServiceModel model = ServiceModel.fromJson(data[index].data() as Map<String, dynamic>);
+            return sourceOrderServiceInfo(model, context);
           },
         ),
       ),
@@ -56,10 +55,10 @@ class OrderCard extends StatelessWidget {
 
 
 
-Widget sourceOrderInfo(ItemModel model, BuildContext context,
+Widget sourceOrderServiceInfo(ServiceModel model, BuildContext context,
     {Color? background})
 {
-  width =  MediaQuery.of(context).size.width;
+  var width =  MediaQuery.of(context).size.width;
 
   return  Container(
     color: Colors.grey.shade100,
@@ -87,7 +86,7 @@ Widget sourceOrderInfo(ItemModel model, BuildContext context,
                   children: [
                     Expanded(
                       child: Text(
-                        model.title.toString(),
+                        model.orderName.toString(),
                         style:
                         TextStyle(color: Colors.black, fontSize: 14.0),
                       ),
@@ -104,7 +103,7 @@ Widget sourceOrderInfo(ItemModel model, BuildContext context,
                   children: [
                     Expanded(
                       child: Text(
-                        model.shortInfo.toString(),
+                        model.serviceHeight.toString(),
                         style: TextStyle(
                             color: Colors.black54, fontSize: 12.0),
                       ),
@@ -135,7 +134,7 @@ Widget sourceOrderInfo(ItemModel model, BuildContext context,
                                   fontSize: 16.0, color: Colors.red),
                             ),
                             Text(
-                              model.price.toString(),
+                              model.totalPrice.toString(),
                               style: TextStyle(
                                   fontSize: 15.0, color: Colors.grey),
                             ),

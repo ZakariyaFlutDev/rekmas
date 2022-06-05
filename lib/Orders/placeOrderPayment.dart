@@ -64,6 +64,9 @@ class _PaymentPageState extends State<PaymentPage> {
       EcommerceApp.productID: EcommerceApp.sharedPreferences!.getStringList(
           EcommerceApp.userCartList),
 
+      EcommerceApp.serviceID: EcommerceApp.sharedPreferences!.getStringList(
+          EcommerceApp.userServiceList),
+
       EcommerceApp.productQuantities: EcommerceApp.sharedPreferences!.getStringList(
           EcommerceApp.productQuantities),
 
@@ -82,6 +85,8 @@ class _PaymentPageState extends State<PaymentPage> {
           EcommerceApp.userUID),
       EcommerceApp.productID: EcommerceApp.sharedPreferences!.getStringList(
           EcommerceApp.userCartList),
+      EcommerceApp.serviceID: EcommerceApp.sharedPreferences!.getStringList(
+          EcommerceApp.userServiceList),
       EcommerceApp.paymentDetails: "Cash on Delivery",
       EcommerceApp.orderTime: DateTime
           .now()
@@ -101,6 +106,11 @@ class _PaymentPageState extends State<PaymentPage> {
         EcommerceApp.userCartList);
 
     EcommerceApp.sharedPreferences!.setStringList(
+        EcommerceApp.userServiceList, ["garbageValue"]);
+    List<String>? tempServiceList = EcommerceApp.sharedPreferences!.getStringList(
+        EcommerceApp.userServiceList);
+
+    EcommerceApp.sharedPreferences!.setStringList(
         EcommerceApp.productQuantities, ["garbageValue"]);
     List<String>? quantityList = EcommerceApp.sharedPreferences!.getStringList(
         EcommerceApp.productQuantities);
@@ -109,10 +119,14 @@ class _PaymentPageState extends State<PaymentPage> {
         EcommerceApp.sharedPreferences!.getString(EcommerceApp.userUID)).update(
         {
           EcommerceApp.userCartList: tempList,
+          EcommerceApp.userServiceList: tempServiceList,
           EcommerceApp.productQuantities: quantityList,
         }).then((value) {
       EcommerceApp.sharedPreferences!.setStringList(
           EcommerceApp.userCartList, tempList!);
+
+      EcommerceApp.sharedPreferences!.setStringList(
+          EcommerceApp.userServiceList, tempServiceList!);
 
       EcommerceApp.sharedPreferences!.setStringList(
           EcommerceApp.productQuantities, quantityList!);

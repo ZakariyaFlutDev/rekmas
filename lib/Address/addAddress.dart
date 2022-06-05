@@ -1,4 +1,5 @@
 import 'package:rekmas/Config/config.dart';
+import 'package:rekmas/Store/serviceStore.dart';
 import 'package:rekmas/Store/storehome.dart';
 import 'package:rekmas/Widgets/customAppBar.dart';
 import 'package:rekmas/Models/address.dart';
@@ -47,7 +48,7 @@ class AddAddress extends StatelessWidget {
                 FocusScope.of(context).requestFocus(FocusNode());
                 formKey.currentState!.reset();
               });
-              Route route = MaterialPageRoute(builder: (c) => StoreHome());
+              Route route = MaterialPageRoute(builder: (c) => ServiceStore());
               Navigator.pushReplacement(context, route);
             }
           },
